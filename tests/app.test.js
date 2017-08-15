@@ -12,12 +12,18 @@ describe('Cases from app.js', () => { // this is a testing suite made up of suit
     it('should be an array', () => {
       const apples = cases.apples;
       expect(apples).to.be.a('array'); // Begin here something is wrong, fix it.
-      expect(apples).to.contain('Red Delicious');
-      expect(apples).to.have.length(4);
     });
-      
-    // write a test to check the correct length of the apples array.
+    it('should have a length of 4', () => {
+      const applesLength = cases.apples.length;
+      expect(applesLength).to.equal(4);
+          // write a test to check the correct length of the apples array.
+    });
+
     // write a test to check to see if the apples array contains 'Red Delicious'.
+    it('apples should contain Red Delicious', () => {
+      const applesArray = cases.apples;
+      expect(applesArray).to.contain('Red Delicious');
+    });
       
   });
 
@@ -25,37 +31,50 @@ describe('Cases from app.js', () => { // this is a testing suite made up of suit
     it('should be an object', () => {
       const Ben = cases.Ben;
       expect(Ben).to.be.an('object');
-      expect(Ben.favBand).to.equal('Beastie Boys');
     });
-    
-    // write a test to check if Ben's favorite band is 'Beastie Boys'.
+    it('should contain Beasite Boys', () => {
+      const benFavBand = cases.Ben.favBand;
+      expect(benFavBand).to.equal('Beastie Boys');
+      // write a test to check if Ben's favorite band is 'Beastie Boys'.
+    });
   });
 
   describe('Sean', () => {
     it('should be an object', () => {
       const Sean = cases.Sean;
       expect(Sean).to.be.an('object');
-      expect(Sean.favFood).to.equal('Pizza');
     });
-    // write a test to check if Seans's favorite food is 'Pizza'.
+    it('should contain favorite food as Pizza', () => {
+      const seanFavFood = cases.Sean.favFood;
+      expect(seanFavFood).to.equal('Pizza');
+      // write a test to check if Seans's favorite food is 'Pizza'.
+    });
+
   });
 
   describe('Ryan', () => {
     it('should be an object', () => {
       const Ryan = cases.Ryan;
       expect(Ryan).to.be.an('object');
-      expect(Ryan.favBook).to.not.equal('Harry Potter');
     });
-    // write a test to see if Ryan's favBook is `not` 'Harry Potter'.
+    it('should not contain Harry Potter as favorite book', () => {
+      const ryanFavBook = cases.Ryan.favBook;
+      expect(ryanFavBook).to.not.equal('Harry Potter');
+      // write a test to see if Ryan's favBook is `not` 'Harry Potter'.
+    });
+    
   });
 
   describe('Austen', () => {
     it('should be an object', () => {
       const Austen = cases.Austen;
-      expect(Austen).to.be.an('object');
-      expect(Austen.favColor).to.not.equal('Gold');
+      expect(Austen).to.be.an('object');      
     });
-    // write a test to see if Austen's favColor is not 'Gold'.
+    it('should contain Gold as favColor', () => {
+      const austenFavColor = cases.Austen.favColor;
+      expect(austenFavColor).to.not.equal('Gold');
+      // write a test to see if Austen's favColor is not 'Gold'.
+    });
   });
 
   describe('Karthik', () => {
@@ -74,7 +93,12 @@ describe('Cases from app.js', () => { // this is a testing suite made up of suit
       expect(addNums(1,2)).to.equal(3);
     });
     // write a test to check if 'addNums' returns the expected value
+    it('should return expected value', () => {
+      const addNums = cases.addNums;
+      expect(addNums(1,2)).to.equal(3);
       // i.e. if is called addNums(1, 2); the return value should be 3.
+      // write a test to check if 'addNums' returns the expected value
+    });
   });
 
   describe('callBackInvoker', () => {
@@ -86,7 +110,7 @@ describe('Cases from app.js', () => { // this is a testing suite made up of suit
       // this is where you're going to be using 'chai's sinon' spy function.
       const callBack = sinon.spy();
       const newCbInvoker = cases.callBackInvoker;
-      cases.callBackInvoker(callBack);
+      newCbInvoker(callBack);
       // pass our spy `callBack` to our newCbInvoker fn. 
       // write a test that to see if our callback has been called.
         // hint - you will need to look at https://github.com/domenic/sinon-chai to see syntax around this
@@ -101,9 +125,10 @@ describe('Cases from app.js', () => { // this is a testing suite made up of suit
     //similiar to above where we are utilizing our spy from sinon, this assertion should test if a cb is called x times.
     it('should call a callback for n times passed to cases.iterator', () => {
       const callBack = sinon.spy();
+      const num = 3;
       const iterator = cases.iterator;
-      cases.iterator(callBack);
-
+      iterator(num, callBack);
+      expect(callBack).to.have.callCount(3);
     });
   });
 
